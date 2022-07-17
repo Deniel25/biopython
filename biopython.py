@@ -4,6 +4,8 @@ from Bio import SeqIO
 from Bio.Blast import NCBIWWW
 from Bio.Blast import NCBIXML
 import sys
+import warnings
+warnings.filterwarnings("ignore")
 
 # Bladimir Pardo
 # Daniel Diaz
@@ -11,13 +13,10 @@ import sys
 # Felipe Lagos
 
 def main():
-    
-    print(f'Llamada con {len(sys.argv)} argumentos: \t{sys.argv}')
     #Validacion de Argumentos
     if len(sys.argv) != 2:
         print(f'USO: {sys.argv[0]} <Hebra>')
         sys.exit()
-
     seq = sys.argv[1]
     
     #Blasteo
@@ -26,7 +25,6 @@ def main():
     with open("resultado_blast.xml", "w") as out_handle:
         out_handle.write(result_handle.read())
     result_handle.close()
-    print('archivo almacenado')
 
     resultados = open("resultado_blast.xml")
     blast_record = NCBIXML.read(resultados)
